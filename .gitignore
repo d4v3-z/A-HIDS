@@ -1,0 +1,22 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environment & temporary files
+.env
+.venv/
+env/
+venv/
+*.tmp
+*.bak
+
+# Runtime logs (keep folder structure)
+logs/*.log
+!logs/.gitkeep
+
+# OS generated files
+.DS_Store
+Thumbs.db
+laptop/

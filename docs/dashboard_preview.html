@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-HIDS // TACTICAL C2 COMMAND MATRIX</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #080a0f;
+      --bg-panel: #0e121a;
+      --bg-subpanel: #141924;
+      --border-dim: #1e2535;
+      --border-bright: #2d374d;
+      --text-main: #d1d5db;
+      --text-dim: #64748b;
+      --text-bright: #f8fafc;
+      --color-green: #00ff66;
+      --color-amber: #f59e0b;
+      --color-red: #ef4444;
+      --color-cyan: #00e5ff;
+      --color-purple: #c084fc;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.04) 0%, transparent 60%),
+        linear-gradient(rgba(30, 37, 53, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 37, 53, 0.25) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    .font-mono-tech { font-family: var(--font-mono); }
+
+    .panel-tactical {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-dim);
+      position: relative;
+    }
+    .panel-tactical::before {
+      content: "+";
+      position: absolute;
+      top: -7px;
+      left: -4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--border-bright);
+    }
+    .panel-tactical::after {
+      content: "+";
+      position: absolute;
+      top: -7px;
+      right: -4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--border-bright);
+    }
+
+    .dot-pulse {
+      width: 7px;
+      height: 7px;
+      background-color: var(--color-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--color-green);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .feed-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-bright) transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 antialiased">
+
+  <!-- TOP BAR -->
+  <div class="bg-[#0b0e14] border border-[var(--border-dim)] px-4 py-2 flex flex-wrap justify-between items-center font-mono-tech text-xs tracking-wider mb-4">
+    <div class="flex items-center gap-3">
+      <span class="text-[var(--color-cyan)] font-semibold">SECURITY SPECIFICATION:</span>
+      <span class="text-zinc-400">MIL-STD OUT-OF-BAND DECEPTION ARCHITECTURE</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <div>ESP32: <span class="text-[var(--color-green)] font-bold">192.168.0.111:80/23 [ONLINE]</span></div>
+      <div>SENTINEL: <span class="text-[var(--color-cyan)]">AIR-GAPPED (D2/D7/D8)</span></div>
+      <div class="flex items-center gap-2 text-[var(--color-green)] font-semibold">
+        <div class="dot-pulse"></div> TELEMETRY ACTIVE
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-[#0e121a]/90 border border-[var(--border-dim)] px-6 py-4 flex flex-wrap justify-between items-center mb-4">
+    <div class="flex items-center gap-3">
+      <span class="text-[var(--color-cyan)] font-mono-tech text-xl font-bold">//</span>
+      <div>
+        <h1 class="text-white font-mono-tech text-base font-bold tracking-wider">A-HIDS TACTICAL COMMAND & SOC AUDIT MATRIX</h1>
+        <p class="text-zinc-500 font-mono-tech text-[11px]">AUTONOMOUS HARDWARE DECEPTION & HARD-RESET PURGE ORCHESTRATOR</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-6 font-mono-tech text-xs text-zinc-400">
+      <div>TARGET BAIT: <b class="text-white">192.168.0.111</b></div>
+      <div>C2 BUS: <b class="text-white">/dev/ttyACM0 (115200)</b></div>
+      <div>UDP BROADCAST: <b class="text-[var(--color-purple)]">PORT 9999</b></div>
+      <div>CLOCK: <b class="text-[var(--color-cyan)]" id="clock-display">20:18:45</b></div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD GRID -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+    <!-- COL 1: HARDWARE TOPOLOGY (4 cols) -->
+    <div class="lg:col-span-3 panel-tactical flex flex-col">
+      <div class="bg-[var(--bg-subpanel)] px-4 py-2 border-b border-[var(--border-dim)] flex justify-between items-center font-mono-tech text-xs font-semibold text-white uppercase tracking-wider">
+        <span>[01] Physical Bus Topology</span>
+        <span class="text-[9px] px-1.5 py-0.5 bg-cyan-950/60 text-[var(--color-cyan)] border border-cyan-800">AIR-GAP</span>
+      </div>
+      <div class="p-4 flex-1 space-y-4">
+        
+        <!-- THE BAIT -->
+        <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+          <div class="flex justify-between items-center font-mono-tech text-xs font-bold text-white mb-2">
+            <span>THE BAIT (Honeypot)</span>
+            <span class="text-[var(--color-green)] text-[10px]">● ONLINE</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 font-mono-tech text-[11px] text-zinc-400">
+            <span>Hardware:</span><span class="col-span-2 text-zinc-200">ESP32 DevKit V1 (30P)</span>
+            <span>IP / Sub:</span><span class="col-span-2 text-zinc-200">192.168.0.111 (M@rx!)</span>
+            <span>Services:</span><span class="col-span-2 text-zinc-200">HTTP :80 // Telnet :23</span>
+            <span>Status:</span><span class="col-span-2 text-[var(--color-green)]">Pristine State</span>
+          </div>
+        </div>
+
+        <!-- THE SENTINEL -->
+        <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+          <div class="flex justify-between items-center font-mono-tech text-xs font-bold text-white mb-2">
+            <span>THE GHOST SENTINEL</span>
+            <span class="text-[var(--color-cyan)] text-[10px]">ISOLATED</span>
+          </div>
+          <div class="grid grid-cols-3 gap-1 font-mono-tech text-[11px] text-zinc-400">
+            <span>Controller:</span><span class="col-span-2 text-zinc-200">Arduino Uno / Nano</span>
+            <span>Serial C2:</span><span class="col-span-2 text-zinc-200">/dev/ttyACM0 @ 115200</span>
+            <span>Watchdog:</span><span class="col-span-2 text-zinc-200">15.0s (Grace: 25s)</span>
+            <span>RTC Driver:</span><span class="col-span-2 text-zinc-200">DS1302 Standalone</span>
+          </div>
+        </div>
+
+        <!-- HARDWARE INTERLINK PINOUT -->
+        <div class="bg-[#090c12] border border-[var(--border-dim)] p-3 font-mono-tech text-[10px]">
+          <div class="text-[var(--color-cyan)] font-bold uppercase mb-2">// 4-Wire Hardware Interlink</div>
+          <div class="space-y-1.5">
+            <div class="flex justify-between pb-1 border-b border-zinc-800">
+              <span class="text-zinc-400">TX2 (GPIO17) &rarr; D2</span>
+              <span class="text-[var(--color-green)] font-bold">1-WAY UART [9600]</span>
+            </div>
+            <div class="flex justify-between pb-1 border-b border-zinc-800">
+              <span class="text-zinc-400">EN Pin &larr; Uno D7</span>
+              <span class="text-[var(--color-cyan)] font-bold">OPEN-DRAIN RESET</span>
+            </div>
+            <div class="flex justify-between pb-1 border-b border-zinc-800">
+              <span class="text-zinc-400">GPIO27 &larr; Uno D8</span>
+              <span class="text-[var(--color-purple)] font-bold">PURGE STRAP NVS</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-zinc-400">GND &harr; GND</span>
+              <span class="text-zinc-400">COMMON 0V GROUND</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIVE DEFENSE NODE -->
+        <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+          <div class="flex justify-between items-center font-mono-tech text-xs font-bold text-white mb-1">
+            <span>ACTIVE DEFENSE CLIENTS</span>
+            <span class="text-[var(--color-purple)] text-[10px]">ARMED</span>
+          </div>
+          <p class="text-zinc-400 font-mono-tech text-[11px]">UDP Broadcast Subnet :9999</p>
+          <p class="text-zinc-500 font-mono-tech text-[10px] mt-1">Autonomous Quarantine via `trusted_node.py`</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COL 2: DEFENSE METRICS & 4 PILLARS (4 cols) -->
+    <div class="lg:col-span-4 panel-tactical flex flex-col">
+      <div class="bg-[var(--bg-subpanel)] px-4 py-2 border-b border-[var(--border-dim)] flex justify-between items-center font-mono-tech text-xs font-semibold text-white uppercase tracking-wider">
+        <span>[02] Multi-Layer Defense Matrix</span>
+        <span class="text-[9px] px-1.5 py-0.5 bg-emerald-950/60 text-[var(--color-green)] border border-emerald-800">METRICS</span>
+      </div>
+      <div class="p-4 flex-1 space-y-4">
+
+        <!-- STATS GRID -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+            <div class="font-mono-tech text-[10px] text-zinc-500 uppercase">Audit Events</div>
+            <div class="font-mono-tech text-2xl font-bold text-[var(--color-cyan)] mt-1">104</div>
+          </div>
+          <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+            <div class="font-mono-tech text-[10px] text-zinc-500 uppercase">Hardware Lockdowns</div>
+            <div class="font-mono-tech text-2xl font-bold text-[var(--color-red)] mt-1">155</div>
+          </div>
+          <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+            <div class="font-mono-tech text-[10px] text-zinc-500 uppercase">Entropy Probes</div>
+            <div class="font-mono-tech text-2xl font-bold text-zinc-200 mt-1">19</div>
+          </div>
+          <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3">
+            <div class="font-mono-tech text-[10px] text-zinc-500 uppercase">Canary Triggers</div>
+            <div class="font-mono-tech text-2xl font-bold text-[var(--color-amber)] mt-1">28</div>
+          </div>
+        </div>
+
+        <!-- 4 PILLARS VISUALIZATION -->
+        <div>
+          <div class="font-mono-tech text-[10px] text-[var(--color-cyan)] uppercase font-semibold mb-2">// 4 Pillars of Deception & Detection</div>
+          <div class="space-y-2">
+            
+            <div class="p-2.5 bg-[var(--bg-subpanel)] border-l-2 border-[var(--color-red)] font-mono-tech text-xs">
+              <div class="flex justify-between items-center font-bold text-zinc-100">
+                <span>PILAR 1: CANARY TRIPWIRES</span>
+                <span class="text-[var(--color-red)]">+100 PTS</span>
+              </div>
+              <p class="text-zinc-500 text-[10px] mt-0.5">Jebakan: /.env, /admin_secret, /wp-login.php, Port 23</p>
+            </div>
+
+            <div class="p-2.5 bg-[var(--bg-subpanel)] border-l-2 border-[var(--color-amber)] font-mono-tech text-xs">
+              <div class="flex justify-between items-center font-bold text-zinc-100">
+                <span>PILAR 2: WAF HEURISTICS</span>
+                <span class="text-[var(--color-amber)]">+35 PTS</span>
+              </div>
+              <p class="text-zinc-500 text-[10px] mt-0.5">Signature: SQLi (Union/Or), CMDi (; id), LFI (..), XSS (&lt;svg&gt;)</p>
+            </div>
+
+            <div class="p-2.5 bg-[var(--bg-subpanel)] border-l-2 border-[var(--color-purple)] font-mono-tech text-xs">
+              <div class="flex justify-between items-center font-bold text-zinc-100">
+                <span>PILAR 3: SHANNON ENTROPY</span>
+                <span class="text-[var(--color-purple)]">+35 PTS</span>
+              </div>
+              <p class="text-zinc-500 text-[10px] mt-0.5">H &gt; 4.5 (Encrypted Shellcode) // H &lt; 1.8 (NOP Sled Overflow)</p>
+            </div>
+
+            <div class="p-2.5 bg-[var(--bg-subpanel)] border-l-2 border-[var(--color-green)] font-mono-tech text-xs">
+              <div class="flex justify-between items-center font-bold text-zinc-100">
+                <span>PILAR 4: SLIDING WINDOW</span>
+                <span class="text-[var(--color-green)]">+10 / HIT</span>
+              </div>
+              <p class="text-zinc-500 text-[10px] mt-0.5">Decay Eksponensial T1/2 = 60s, Tarpit latency throttling</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- MTTR BENCHMARK -->
+        <div class="bg-[var(--bg-subpanel)] border border-[var(--border-dim)] p-3 font-mono-tech text-xs">
+          <div class="text-zinc-500 text-[10px] uppercase font-bold">STRESS TEST BENCHMARK AUDIT</div>
+          <div class="flex justify-between items-center mt-2">
+            <span class="text-zinc-400">Mean Time To Recovery (MTTR):</span>
+            <b class="text-[var(--color-green)] font-bold">5.44 Detik</b>
+          </div>
+          <div class="flex justify-between items-center mt-1">
+            <span class="text-zinc-400">State Sterilization Success:</span>
+            <b class="text-[var(--color-green)] font-bold">100.0% (Clean Boot)</b>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- COL 3: TELEMETRY FEED & ACTIONS (5 cols) -->
+    <div class="lg:col-span-5 panel-tactical flex flex-col">
+      <div class="bg-[var(--bg-subpanel)] px-4 py-2 border-b border-[var(--border-dim)] flex justify-between items-center font-mono-tech text-xs font-semibold text-white uppercase tracking-wider">
+        <span>[03] Real-Time Forensic Stream</span>
+        <span class="text-[9px] px-1.5 py-0.5 bg-emerald-950/60 text-[var(--color-green)] border border-emerald-800">LIVE C2 SSE</span>
+      </div>
+      <div class="p-4 flex-1 flex flex-col">
+
+        <!-- LOG TERMINAL -->
+        <div class="bg-[#05070c] border border-[var(--border-dim)] p-3 font-mono-tech text-xs flex-1 h-[420px] overflow-y-auto feed-scroll space-y-1">
+          <div class="text-zinc-500">[2026-10-09 20:07:07] [CONNECTED] Terhubung ke /dev/ttyACM0! Menunggu sinyal sentinel...</div>
+          <div class="text-zinc-500">[2026-10-09 20:07:07] > [INTERLINK] Mendengarkan event dari ESP32 di Pin D2 (9600 bps)...</div>
+          <div class="text-amber-400 bg-amber-950/20 px-1 border-l-2 border-amber-500">[2026-10-09 20:07:33] [SENTINEL LOG] EVENT|EV,52,CRITICAL,192.168.0.110,IOT_BOTNET_TELNET,100|TS=2000-00-00 00:00:00</div>
+          <div class="text-red-400 bg-red-950/30 p-1.5 border-l-2 border-red-500 font-bold">
+            🚨 [CRITICAL BREACH] ULTIMATUM LOCKDOWN TRIGGERED!<br>
+            Payload : LOCKDOWN|DEV=SENTINEL-NANO-01|DATA=EV,52,CRITICAL,192.168.0.110,IOT_BOTNET_TELNET,100<br>
+            Penyerang : 192.168.0.110 | Threat: IOT_BOTNET_TELNET<br>
+            [UDP BROADCAST] Sinyal lockdown terkirim ke seluruh perangkat di port 9999!<br>
+            > [SENTINEL] >> Mengeksekusi Hardware Hard-Reset ke ESP32...<br>
+            > [SENTINEL] >> ESP32 Hard-Reset selesai. Chip reboot ke state steril.
+          </div>
+          <div class="text-zinc-400">[2026-10-09 20:07:34] [FORENSIC PAYLOAD] PAYLOAD|PL,52,PORT_23_MIRAI_PROBE</div>
+          <div class="text-emerald-400">[2026-10-09 20:07:36] [SENTINEL LOG] EVENT|EV,0,INFO,192.168.0.111,WIFI_ONLINE,0|TS=2000-00-00 00:00:00</div>
+          <div class="text-zinc-500">[2026-10-09 20:18:34] [SENTINEL LOG] EVENT|EV,658,CRITICAL,192.168.0.110,IOT_BOTNET_TELNET,100|TS=2000-00-00 00:00:00</div>
+          <div class="text-cyan-400 bg-cyan-950/20 px-1 border-l-2 border-cyan-500">[2026-10-09 20:18:35] [REBOOT] ESP32 Telah Kembali Online di 192.168.0.111 (265ms)</div>
+        </div>
+
+        <!-- TACTICAL TEST-FIRE -->
+        <div class="mt-4 pt-3 border-t border-[var(--border-dim)]">
+          <div class="font-mono-tech text-[10px] text-zinc-400 uppercase font-bold mb-2">// Tactical Live Test Controls</div>
+          <div class="grid grid-cols-4 gap-2 font-mono-tech text-[11px]">
+            <a href="http://localhost:5050" target="_blank" class="block text-center py-2 px-1 bg-[var(--bg-subpanel)] border border-[var(--border-bright)] hover:border-[var(--color-cyan)] text-zinc-200 hover:text-[var(--color-cyan)] uppercase font-semibold">
+              Open Live UI
+            </a>
+            <div class="text-center py-2 px-1 bg-[var(--bg-subpanel)] border border-[var(--border-dim)] text-zinc-400">
+              SQLi Vector
+            </div>
+            <div class="text-center py-2 px-1 bg-[var(--bg-subpanel)] border border-[var(--border-dim)] text-zinc-400">
+              Canary /.env
+            </div>
+            <div class="text-center py-2 px-1 bg-red-950/30 border border-red-800 text-red-400 font-bold uppercase">
+              Telnet Port 23
+            </div>
+          </div>
+          <p class="text-zinc-500 font-mono-tech text-[10px] mt-2">
+            💡 Dashboard server aktif di <a href="http://localhost:5050" class="text-[var(--color-cyan)] underline">http://localhost:5050</a> (Bisa dibuka langsung di browser saat presentasi).
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock-display').innerText = now.toTimeString().split(' ')[0];
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+</body>
+</html>

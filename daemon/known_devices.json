@@ -1,0 +1,112 @@
+{
+  "192.168.0.1": {
+    "ip": "192.168.0.1",
+    "mac": "40:ae:30:11:40:66",
+    "vendor": "TP-Link Technologies (Gateway)",
+    "hostname": "router.lan",
+    "first_seen": "2026-10-18 10:29:10",
+    "last_seen": "2026-10-18 18:33:14",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "GATEWAY"
+  },
+  "192.168.0.110": {
+    "ip": "192.168.0.110",
+    "mac": "MASTER_HOST",
+    "vendor": "A-HIDS Fleet Defender (Parrot Security 7.4 (echo))",
+    "hostname": "parrot",
+    "first_seen": "2026-10-18 10:29:10",
+    "last_seen": "2026-10-18 16:03:38",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "DEFENSE_NODE"
+  },
+  "192.168.0.112": {
+    "ip": "192.168.0.112",
+    "mac": "8c:94:df:7c:c4:f8",
+    "vendor": "Espressif Inc.",
+    "hostname": "Cisco-Catalyst-Switch",
+    "first_seen": "2026-10-18 18:20:58",
+    "last_seen": "2026-10-18 18:37:14",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "HONEYPOT_BAIT"
+  },
+  "192.168.0.200": {
+    "ip": "192.168.0.200",
+    "mac": "f4:39:09:20:32:48",
+    "vendor": "Hewlett Packard Enterprise",
+    "hostname": "pve.lan",
+    "first_seen": "2026-10-18 10:29:10",
+    "last_seen": "2026-10-18 18:34:02",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "PROXMOX_HOST"
+  },
+  "192.168.0.114": {
+    "ip": "192.168.0.114",
+    "mac": "bc:24:11:14:14:14",
+    "vendor": "Proxmox / KVM Virtual NIC",
+    "hostname": "tester-lxc103",
+    "first_seen": "2026-10-18 10:29:10",
+    "last_seen": "2026-10-18 18:34:02",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "DEFENSE_NODE"
+  },
+  "192.168.0.111": {
+    "ip": "192.168.0.111",
+    "mac": "bc:24:11:11:11:11",
+    "vendor": "Proxmox / KVM Virtual NIC",
+    "hostname": "debian-vm110",
+    "first_seen": "2026-10-18 10:29:10",
+    "last_seen": "2026-10-18 18:34:02",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "DEFENSE_NODE"
+  },
+  "192.168.0.155": {
+    "ip": "192.168.0.155",
+    "mac": "bc:24:11:aa:13:b4",
+    "vendor": "Proxmox Server Solutions GmbH",
+    "hostname": "N/A",
+    "first_seen": "2026-10-18 10:29:16",
+    "last_seen": "2026-10-18 18:34:02",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "UNKNOWN_NODE"
+  },
+  "192.168.0.119": {
+    "ip": "192.168.0.119",
+    "mac": "b4:9d:02:f8:c3:f3",
+    "vendor": "Samsung Electronics",
+    "hostname": "N/A",
+    "first_seen": "2026-10-18 16:01:39",
+    "last_seen": "2026-10-18 18:16:03",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "UNKNOWN_NODE"
+  },
+  "10.211.137.55": {
+    "ip": "10.211.137.55",
+    "mac": "8c:94:df:7c:c4:f8",
+    "vendor": "Espressif Inc.",
+    "hostname": "RouterOS-Core-Gateway",
+    "first_seen": "2026-10-18 17:42:33",
+    "last_seen": "2026-10-18 17:42:33",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "HONEYPOT_BAIT"
+  },
+  "192.168.4.1": {
+    "ip": "192.168.4.1",
+    "mac": "8c:94:df:7c:c4:f8",
+    "vendor": "Espressif Inc.",
+    "hostname": "Cisco-Catalyst-Managed-Switch",
+    "first_seen": "2026-10-18 17:54:08",
+    "last_seen": "2026-10-18 17:54:08",
+    "status": "ALLOWED",
+    "threat_score": 0,
+    "device_type": "HONEYPOT_BAIT"
+  }
+}

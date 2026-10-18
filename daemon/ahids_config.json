@@ -1,0 +1,21 @@
+{
+  "broadcast_port": 9999,
+  "secret_key": "SECRET_MASTER_NANO_2026",
+  "ntfy_enabled": true,
+  "ntfy_server": "https://ntfy.sh",
+  "ntfy_topic": "ahids_alert_mametz",
+  "telegram_enabled": true,
+  "telegram_bot_token": "8903035548:AAH2K6A_6ptzV1I2R3aR75_G4RbGBMem1DI",
+  "telegram_chat_id": "-1003836582946",
+  "discord_enabled": false,
+  "discord_webhook": "",
+  "auto_block_master": true,
+  "default_quarantine_timeout": 300,
+  "esp32_ip": "192.168.0.112",
+  "sensitivity_level": 1,
+  "sensitivity_thresholds": {
+    "lvl1": 100,
+    "lvl2": 60,
+    "lvl3": 1
+  }
+}
